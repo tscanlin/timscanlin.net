@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tim Scanlin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html, body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+      }
+
+      #page {
+        height: inherit;
+        text-align: center;
+        overflow: hidden;
+        width: 100%;
+      }
+
+      #page:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin-right: -0.25em; /* Adjusts for spacing */
+      }
+
+      #background {
+        bottom: 0;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+        z-index: -1;
+      }
+
+      #container {
+        background-color: rgba(255,255,255,0.85);
+        border-radius: 2px;
+        display: inline-block;
+        max-width: 100%;
+        padding: 0 10px;
+        padding-bottom: 10px;
+        vertical-align: middle;
+        width: 310px;
+      }
+
+      h1, h2 {
+        line-height: 1.5;
+        margin: 0;
+      }
+
+      h1 {
+        font-weight: 300;
+        font-size: 2.7em;
+      }
+
+      h2 {
+        font-weight: 400;
+      }
+
+      a {
+        color: #128bde;
+        text-decoration: none;
+        border-bottom: 1px solid #EEE;
+        transition: all 300ms ease;
+      }
+
+      a:hover {
+        border-bottom: 1px solid #128bde;
+      }
+
+      p {
+        font-size: 14px;
+        margin-top: 0;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .no-border,
+      a.no-border {
+        border-width: 0px;
+      }
+
+      .gray {
+        color: #555;
+      }
+
+      .social-icons {
+        margin-top: 1.5em;
+        margin-bottom: 1em;
+      }
+
+      .icon {
+        border-radius: 2px;
+        height: 25px;
+        width: 25px;
+      }
+
+      .icon-sm {
+        height: 20px;
+        width: 20px;
+      }
+
+      .play-pause-container {
+        display: inline-block;
+        font-size: 1.2em;
+        position: relative;
+        height: 1em;
+        opacity: 1;
+        transition: all 300ms ease;
+      }
+
+      .play-pause-container:hover {
+        opacity: 0.7;
+      }
+
+      .play-icon,
+      .pause-icon  {
+        position: absolute;
+        cursor: pointer;
+        left: -10px;
+      }
+
+      #play-pause:checked + .play-pause-container .play-icon {
+        display: none;
+      }
+
+      #play-pause:checked + .play-pause-container .pause-icon {
+        display: inline-block;
+      }
+
+      /* SVG styles */
+      #background path {
+        fill: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="icon-twitter" viewBox="0 0 100 100">
+        <rect x="0.148" fill="#29A7DF" width="100.68" height="100.681"/>
+        <path fill="#FFFFFF" d="M84.047,29.524c-2.47,1.096-5.124,1.836-7.909,2.168c2.843-1.705,5.03-4.401,6.055-7.619
+            c-2.656,1.579-5.604,2.727-8.741,3.344c-2.514-2.678-6.094-4.35-10.053-4.35c-7.605,0-13.771,6.167-13.771,13.771
+            c0,1.08,0.122,2.129,0.356,3.136c-11.444-0.571-21.589-6.054-28.382-14.388c-1.184,2.037-1.863,4.4-1.863,6.925
+            c0,4.775,2.431,8.993,6.123,11.46c-2.255-0.07-4.379-0.693-6.235-1.722v0.172c0,6.672,4.747,12.237,11.043,13.503
+            c-1.153,0.313-2.373,0.485-3.626,0.485c-0.886,0-1.751-0.089-2.591-0.251c1.752,5.472,6.836,9.451,12.861,9.565
+            c-4.71,3.692-10.646,5.895-17.102,5.895c-1.11,0-2.205-0.067-3.282-0.192c6.092,3.903,13.331,6.184,21.112,6.184
+            c25.326,0,39.176-20.979,39.176-39.177c0-0.595-0.016-1.188-0.038-1.784C79.864,34.712,82.196,32.287,84.047,29.524z"/>
+    </symbol>
+    <symbol id="icon-rss" viewBox="0 0 100 100">
+        <rect y="0.152" fill="#ED802C" width="99.849" height="99.848"/>
+        <path fill="#FFFFFF" d="M20.001,72.134c5.179,0,9.376,4.202,9.376,9.379c0,5.184-4.197,9.378-9.376,9.378
+            c-5.18,0-9.377-4.194-9.377-9.378C10.624,76.336,14.821,72.134,20.001,72.134z"/>
+        <path fill="#FFFFFF" d="M10.633,57.87c8.791,0,17.048,3.438,23.261,9.674c6.216,6.247,9.637,14.564,9.637,23.42h13.538
+            c0-25.715-20.83-46.636-46.436-46.636V57.87z"/>
+        <path fill="#FFFFFF" d="M10.651,33.865c31.317,0,56.801,25.624,56.801,57.109h13.534c0-38.957-31.55-70.649-70.335-70.649V33.865z"
+            />
+    </symbol>
+    <symbol id="icon-linkedin" viewBox="0 0 100 100">
+        <rect x="0.72" y="0.152" fill="#027BB5" width="100.53" height="100.529"/>
+        <path fill="#FFFFFF" d="M17.921,38.96h14.184v45.567H17.921V38.96z M25.018,16.308c4.535,0,8.212,3.682,8.212,8.21
+            c0,4.531-3.678,8.212-8.212,8.212c-4.552,0-8.221-3.682-8.221-8.212C16.797,19.99,20.466,16.308,25.018,16.308"/>
+        <path fill="#FFFFFF" d="M40.997,38.96h13.584v6.227h0.192c1.889-3.585,6.515-7.36,13.409-7.36c14.337,0,16.989,9.434,16.989,21.706
+            v24.995H71.015V62.372c0-5.289-0.104-12.086-7.366-12.086c-7.374,0-8.499,5.755-8.499,11.696v22.546H40.997V38.96z"/>
+    </symbol>
+    <symbol id="icon-html5" viewBox="0 0 100 100">
+        <rect x="-0.001" y="0.327" fill="#EA622F" width="100.002" height="100.001"/>
+        <path fill="#FFFFFF" d="M16.548,10.712l6.088,68.292l27.321,7.586l27.396-7.597l6.099-68.282H16.548z M70.752,26.921l-0.381,4.245
+            l-0.169,1.883h-0.028H50h-0.027H38.151l0.767,8.578h11.055H50h17.184h2.254l-0.204,2.248l-1.968,22.052l-0.125,1.414L50,72.093
+            l-0.038,0.008l-17.156-4.76l-1.172-13.153h3.873h4.532l0.597,6.682l9.326,2.519h0.011l9.339-2.523l0.974-10.859H50h-0.027H31.259
+            l-2.061-23.084l-0.199-2.248h20.974H50h20.952L70.752,26.921z"/>
+    </symbol>
+    <symbol id="icon-github" viewBox="0 0 100 100">
+        <rect y="0.148" fill="#181617" width="100.038" height="100.041"/>
+        <path fill="#FFFFFF" d="M50.019,16.28c-19.191,0-34.75,15.557-34.75,34.756c0,15.347,9.954,28.37,23.765,32.97
+            c1.74,0.316,2.374-0.76,2.374-1.678c0-0.824-0.027-3.011-0.048-5.911c-9.666,2.1-11.704-4.657-11.704-4.657
+            c-1.582-4.014-3.86-5.079-3.86-5.079c-3.154-2.159,0.241-2.115,0.241-2.115c3.49,0.246,5.324,3.58,5.324,3.58
+            c3.097,5.313,8.132,3.772,10.114,2.886c0.313-2.248,1.21-3.772,2.203-4.644c-7.717-0.874-15.829-3.863-15.829-17.177
+            c0-3.788,1.356-6.894,3.574-9.321c-0.355-0.882-1.547-4.413,0.343-9.199c0,0,2.915-0.933,9.556,3.565
+            c2.771-0.772,5.748-1.159,8.7-1.172c2.952,0.013,5.925,0.399,8.697,1.172c6.639-4.498,9.554-3.565,9.554-3.565
+            c1.893,4.786,0.701,8.317,0.342,9.199c2.224,2.427,3.573,5.533,3.573,9.321c0,13.353-8.129,16.29-15.869,17.151
+            c1.246,1.073,2.36,3.188,2.36,6.433c0,4.646-0.043,8.393-0.043,9.533c0,0.928,0.629,2.007,2.391,1.667
+            c13.795-4.6,23.743-17.617,23.743-32.959C84.77,31.837,69.216,16.28,50.019,16.28"/>
+    </symbol>
+    <symbol id="icon-facebook" viewBox="0 0 100 100">
+        <rect x="0.5" fill="#3A5A98" width="100" height="100"/>
+        <path fill="#FFFFFF" d="M87.276,59.563l1.964-15.23H74.158v-9.724c0-4.409,1.229-7.415,7.552-7.415l8.059-0.004V13.568
+            c-1.392-0.186-6.175-0.6-11.749-0.6c-11.629,0-19.585,7.099-19.585,20.134v11.23H45.281v15.23h13.153V98.64h15.724V59.563H87.276z"
+            />
+    </symbol>
+    <symbol id="icon-email" viewBox="0 0 100 100">
+        <rect fill="#424242" width="100" height="100"/>
+        <rect x="11" y="26" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-miterlimit="10" width="78" height="48"/>
+        <polyline fill="none" stroke="#FFFFFF" stroke-width="6" stroke-miterlimit="10" points="12.359,25.421 51.041,54.32
+            88.833,25.421 		"/>
+        <line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="60.576" y1="46.564" x2="88.833" y2="73.438"/>
+        <line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="41.506" y1="46.564" x2="13.249" y2="73.438"/>
+    </symbol>
+    <symbol id="icon-pause" viewBox="0 0 100 100">
+    	<g>
+    		<rect fill="#333" x="10" y="10" width="30" height="80" fill="none" />
+    		<rect fill="#333" x="60" y="10" width="30" height="80" fill="none" />
+    	</g>
+    </symbol>
+    <symbol id="icon-play" viewBox="0 0 100 100">
+    	<g>
+    		<polyline fill="#333" points="10,10 90,50 10, 90" />
+    	</g>
+    </symbol>
+    </svg>
+
+    <div id="page">
+      <div id="container">
+        <h1>Tim Scanlin</h1>
+
+        <div class="gray">
+          <p>
+            <b>Designer, Maker, &amp; Thinker</b><br>
+          </p>
+
+          <p>
+            I am currently a frontend engineer working in <a href="https://www.google.com/maps/place/San+Francisco,+CA/">San Francisco</a>.
+            I like to build web applications and help make them faster.
+          </p>
+
+          <p>
+            I also love the outdoors and in my free time I enjoy watersports and riding my bike.
+          </p>
+
+          <p>
+            Check out <a href="http://blog.timscanlin.net/">my blog</a> or <a href="mailto:me@timscanlin.net">email me</a>.
+          </p>
+        </div>
+
+        <div class="social-icons">
+          <a class="no-border" href="mailto:me@timscanlin.net">
+            <svg class="icon"><use xlink:href="#icon-email"></use></svg>
+          </a>
+          <a class="no-border" href="https://github.com/tscanlin">
+            <svg class="icon"><use xlink:href="#icon-github"></use></svg>
+          </a>
+          <a class="no-border" href="https://www.linkedin.com/in/timothy-scanlin-766a6627">
+            <svg class="icon"><use xlink:href="#icon-linkedin"></use></svg>
+          </a>
+          <a class="no-border" href="https://twitter.com/TimothyScanlin">
+            <svg class="icon"><use xlink:href="#icon-twitter"></use></svg>
+          </a>
+        </div>
+
+        <div>
+          <input id="play-pause" type="checkbox" class="hidden" checked="true" autocomplete="off">
+          <label for="play-pause" class="play-pause-container">
+            <svg class="play-icon icon-sm"><use xlink:href="#icon-play"></use></svg>
+            <svg class="pause-icon icon-sm hidden"><use xlink:href="#icon-pause"></use></svg>
+          </label>
+        </div>
+      </div>
+
+      <svg id="background"></svg>
+    </div>
+
+    <script src="assets/js/d3.v3.min.js"></script>
+    <script>
+      var _gaq = _gaq || [];
+
+      // Constants.
+      var svg = d3.select('#background');
+      var QUANTITY = 7;
+      var POINTS = 4;
+      var OPACITY = 0.3;
+      // Delay to make sure everything is loaded first.
+      var START_DELAY = 500;
+
+      // Data generation functions.
+      function generateData() {
+        return d3.range(POINTS).map(getCoordinates);
+      };
+
+      function getCoordinates(i) {
+        var x = i * (1 / (POINTS - 1)) * window.innerWidth;
+        var y = Math.random() * window.innerHeight;
+        return {x: x, y: y};
+      };
+
+      function getDuration() {
+        return 11000 + (Math.random() * 3000);
+      };
+
+      function getHue() {
+        return Math.random() * 360;
+      };
+
+      function getGoodHues() {
+        var a = getHue();
+        var b = getHue();
+        if (Math.abs(a - b) < 200 && Math.abs(a - b) > 30) {
+          return {
+            a: a,
+            b: b
+          };
+        } else {
+          return getGoodHues();
+        }
+      }
+
+      // function getStroke() {
+      //   return Math.floor((Math.random()) * 2) + 0.5;
+      // };
+
+      // d3 line function / helper.
+      var line = d3.svg.line()
+        .interpolate('cardinal')
+        .x(function(d) { return d.x; })
+        .y(function(d) { return d.y; });
+
+      // Append paths.
+      var paths = svg.selectAll('path')
+        .data(d3.range(QUANTITY))
+        .enter()
+        .append('path');
+
+      // Primary transition function.
+      var transition = function() {
+        var duration = getDuration();
+        // Setup interpolation functions.
+        var dataInterpolate = d3.interpolate(generateData(), generateData());
+        var goodHues = getGoodHues();
+        var hueInterpolate = d3.interpolate(goodHues.a, goodHues.b);
+        var strokeInterpolate = d3.interpolate(0.5, 3);
+
+        // Do the interpolations and transitions for each path.
+        paths.each(function(d,i) {
+          var data = dataInterpolate(i * (1 / QUANTITY));
+          var color = hueInterpolate(i * (1 / QUANTITY));
+          var stroke = strokeInterpolate(i * (1 / QUANTITY));
+
+          d3.select(this)
+            .data([data])
+            .transition()
+            .duration(duration)
+            .ease('linear')
+            .attr('d', line)
+            .attr('stroke', 'hsla(' + color + ', 80%, 50%, ' + OPACITY + ')')
+            .attr('stroke-width', stroke);
+        });
+      };
+
+      // Transition looping functions.
+      var interval;
+      function startTransitionLoop() {
+        if (!interval) {
+          // First transition in a timeout so it animates right away.
+          setTimeout(transition, START_DELAY);
+          interval = setInterval(transition, (getDuration() - 3000));
+        }
+      }
+      function stopTransitionLoop() {
+        clearInterval(interval);
+        interval = undefined;
+        paths.transition().duration(0);
+      }
+
+      // Start it.
+      transition();
+      // Start loop.
+      startTransitionLoop();
+
+      // Bind event listeners.
+      document.ontouchstart = transition;
+
+      document.addEventListener('click', function(event) {
+        var playPause = document.querySelector('#play-pause');
+        if (event.target === playPause) {
+          // event.preventDefault();
+          console.log(playPause.checked)
+          if (playPause.checked) {
+            startTransitionLoop();
+          } else {
+            stopTransitionLoop();
+          }
+        } else if (playPause.checked) {
+          transition();
+        }
+
+        _gaq.push(['_trackEvent', 'play-pause', 'Click', this.checked]);
+      });
+    </script>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-53115940-1', 'auto');
+      ga('send', 'pageview');
+      ga('set', '&uid', 'UA-53115940-1');
+    </script>
+
+  </body>
+</html>
