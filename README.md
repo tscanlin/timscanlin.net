@@ -3,3 +3,9 @@
 # To deploy
 
 `git push origin master:gh-pages`
+
+
+## Todo
+
+- Build projects page
+- Maybe bring timeline back
