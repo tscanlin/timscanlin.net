@@ -7,6 +7,6 @@ pages:
   stage: pages
   artifacts:
     paths:
-      - /
+      - .
   only:
     - master
