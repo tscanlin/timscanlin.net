@@ -1,0 +1,14 @@
+image: node:latest
+
+stages:
+  - pages
+
+pages:
+  stage: pages
+  script:
+    - cp -R ./* public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
