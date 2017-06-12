@@ -5,10 +5,8 @@ stages:
 
 pages:
   stage: pages
-  script:
-    - cp -R ./* public/
   artifacts:
     paths:
-      - public
+      - /
   only:
     - master
