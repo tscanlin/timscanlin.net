@@ -5,8 +5,10 @@ stages:
 
 pages:
   stage: pages
+  script:
+    - cp ./CNAME public/ && cp ./index.html public/ && cp ./favicon.ico public/
   artifacts:
     paths:
-      - "."
+      - public
   only:
     - master
